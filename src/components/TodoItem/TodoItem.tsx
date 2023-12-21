@@ -3,16 +3,36 @@ import React, {PropsWithChildren} from 'react';
 import {ITodoItem} from "interfaces";
 
 import * as Styles from './styles';
-export const TodoItem = (props: PropsWithChildren<ITodoItem>) => {
+
+interface TodoItemProps {
+  handleDelete: () => void;
+  toggleIsChecked: () => void;
+}
+
+export const TodoItem = ({
+  children,
+  isChecked,
+  toggleIsChecked,
+  handleDelete
+}: PropsWithChildren<ITodoItem & TodoItemProps>) => {
+
   return (
     <Styles.Wrapper>
       <Styles.Text>
-        {props.children}
+        {children}
       </Styles.Text>
-      <Styles.CheckBox
-        type={"checkbox"}
-        checked={props.isChecked}
-      />
+      <Styles.ButtonsWrapper>
+        <Styles.CheckBox
+          type={"checkbox"}
+          checked={isChecked}
+          onClick={toggleIsChecked}
+        />
+        <Styles.Delete
+          onClick={handleDelete}
+        >
+          x
+        </Styles.Delete>
+      </Styles.ButtonsWrapper>
     </Styles.Wrapper>
   );
 };

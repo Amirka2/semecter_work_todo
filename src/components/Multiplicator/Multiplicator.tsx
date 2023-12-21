@@ -1,29 +1,41 @@
-import React, {useState} from 'react';
+import React, {FormEvent, useState} from 'react';
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 import {saveTodo} from "helpers/todoItems";
 
 import * as Styles from './styles';
 
-interface MultiplicatorProps {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>}
 
-export const Multiplicator = ({setLoading}: MultiplicatorProps) => {
+export const Multiplicator = () => {
   const [text, setText] = useState('');
+  const queryClient = useQueryClient();
 
-  const handleClick = () => {
-    setLoading(true)
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
 
-    saveTodo(text);
+    mutation.mutate(text);
     setText('');
-    alert('clicked +');
-
-    setLoading(false);
   }
 
+  const mutation = useMutation({
+    mutationFn: saveTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] })
+    },
+  })
+
   return (
-    <Styles.Wrapper>
-      <Styles.Input type={'text'} onChange={(e) => setText(e.currentTarget.value)}/>
-      <Styles.AddButton onClick={handleClick}>
+    <Styles.Wrapper
+      onSubmit={handleSubmit}
+    >
+      <Styles.Input
+        type='text'
+        value={text}
+        onChange={(e) => setText(e.currentTarget.value)}
+      />
+      <Styles.AddButton
+        type='submit'
+      >
         +
       </Styles.AddButton>
     </Styles.Wrapper>

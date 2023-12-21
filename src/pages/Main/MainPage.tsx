@@ -1,25 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import {useQuery} from "@tanstack/react-query";
 
 import {MainLayout} from "components/Layout";
 import {TodoList} from "components/TodoList";
 
-import {getTodos} from "helpers/todoItems";
+import {getTodosFromStorage} from "helpers";
+
 import {ITodoItem} from "interfaces";
 
 export const MainPage = () => {
-  let todoItems: ITodoItem[] = [];
-  const [todos, setTodos] = useState<ITodoItem[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const { data : todos, isLoading} = useQuery<ITodoItem[]>({
+    queryKey: ['todos'],
+    queryFn: getTodosFromStorage,
+  });
 
-  useEffect(() => {
-    todoItems = getTodos();
-    setTodos(todoItems);
-    console.log('got todos', todoItems)
-  }, [isLoading]);
+  if (isLoading) {
+    return <p>loading</p>
+  }
 
   return (
     <MainLayout>
-      <TodoList todoItems={todos} setLoading={setLoading}/>
+      <TodoList todoItems={todos || []}/>
     </MainLayout>
   );
 };

@@ -1,7 +1,9 @@
 import {ITodoItem} from "interfaces";
 
+import { setTodosToStorage, getTodosFromStorage } from 'helpers';
+
 export const saveTodo = (text: string) => {
-  const todos = getTodos();
+  const todos = getTodosFromStorage();
 
   let id = 0;
 
@@ -18,19 +20,48 @@ export const saveTodo = (text: string) => {
   todos.push(newTodo);
 
   setTodosToStorage(todos);
+
+  return new Promise((resolve, reject) => {
+    const newTodos = getTodosFromStorage();
+
+    resolve(newTodos);
+    reject("ОШИБКА В СОХРАНЕНИИ БЛЯТЬ");
+  });
 }
 
-export const setTodosToStorage = (todos: ITodoItem[]) => {
-  localStorage.setItem('todoItems', JSON.stringify(todos));
+export const toggleTodoItem = (id: number) => {
+  let todos = getTodosFromStorage();
+
+  todos = todos.map(item => {
+    if (item.id === id) {
+      item.isChecked = !item.isChecked;
+    }
+
+    return item;
+  });
+
+  setTodosToStorage(todos);
+
+  return new Promise((resolve, reject) => {
+    const newTodos = getTodosFromStorage();
+
+    resolve(newTodos);
+    reject("ОШИБКА В ИЗМЕНЕНИИ ПОЛЯ БЛЯТЬ");
+  })
 }
 
-export const getTodos: () => ITodoItem[] = () => {
-  let result: ITodoItem[] = [];
-  const stringedTodos = localStorage.getItem('todoItems');
+export const deleteTodoItem = (id: number) => {
+  let todos = getTodosFromStorage();
 
-  if (stringedTodos !== null) {
-    result = JSON.parse(stringedTodos);
-  }
+  todos = todos.filter(item => item.id !== id);
 
-  return result;
+  setTodosToStorage(todos);
+
+  return new Promise((resolve, reject) => {
+    const newTodos = getTodosFromStorage();
+
+    resolve(newTodos);
+    reject("ОШИБКА В УДАЛЕНИИ БЛЯТЬ");
+  });
 }
+

@@ -18,6 +18,27 @@ export const Text = styled.span`
   font-size: 18px;
 `;
 
-export const CheckBox = styled.input`
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  
+  height: 100%;
+  
+  gap: 8px;
+`;
 
+export const CheckBox = styled.input`
+  height: 24px;
+  
+  cursor: pointer;
+`;
+
+export const Delete = styled.button`
+  width: 24px;
+  
+  background-color: #fff;
+  
+  border: none;
+  
+  cursor: pointer;
 `;
