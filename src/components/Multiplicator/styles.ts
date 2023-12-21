@@ -11,16 +11,6 @@ export const Wrapper = styled.form`
   padding: 0 10px;
 `;
 
-export const Input = styled.input`
-  width: 100%;
-  height: 50px;
-  
-  font-size: 18px;
-  
-  padding: 0 10px;
-  border-radius: 8px;
-`;
-
 export const AddButton = styled.button`
   width: 24px;
   height: 24px;

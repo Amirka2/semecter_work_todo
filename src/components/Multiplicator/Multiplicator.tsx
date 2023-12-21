@@ -1,6 +1,7 @@
 import React, {FormEvent, useState} from 'react';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 
+import {Input} from "components";
 import {saveTodo} from "helpers";
 
 import * as Styles from './styles';
@@ -28,7 +29,7 @@ export const Multiplicator = () => {
     <Styles.Wrapper
       onSubmit={handleSubmit}
     >
-      <Styles.Input
+      <Input
         name='new_todo_text'
         type='text'
         value={text}
