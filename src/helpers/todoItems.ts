@@ -2,6 +2,9 @@ import {ITodoItem} from "interfaces";
 
 import { setTodosToStorage, getTodosFromStorage } from 'helpers';
 
+
+export const getTodos = () => getTodosFromStorage();
+
 export const saveTodo = (text: string) => {
   const todos = getTodosFromStorage();
 

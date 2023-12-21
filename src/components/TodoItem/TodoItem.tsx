@@ -13,7 +13,8 @@ export const TodoItem = ({
   children,
   isChecked,
   toggleIsChecked,
-  handleDelete
+  handleDelete,
+  id
 }: PropsWithChildren<ITodoItem & TodoItemProps>) => {
 
   return (
@@ -23,8 +24,9 @@ export const TodoItem = ({
       </Styles.Text>
       <Styles.ButtonsWrapper>
         <Styles.CheckBox
+          name={`checkbox_${id}`}
           type={"checkbox"}
-          checked={isChecked}
+          defaultChecked={isChecked}
           onClick={toggleIsChecked}
         />
         <Styles.Delete
