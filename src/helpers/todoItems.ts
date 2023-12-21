@@ -6,7 +6,7 @@ export const saveTodo = (text: string) => {
   let id = 0;
 
   if (todos && todos.length > 0) {
-    id = todos[todos.length - 1].id;
+    id = todos[todos.length - 1].id + 1;
   }
 
   const newTodo: ITodoItem = {
@@ -25,7 +25,6 @@ export const setTodosToStorage = (todos: ITodoItem[]) => {
 }
 
 export const getTodos: () => ITodoItem[] = () => {
-  debugger
   let result: ITodoItem[] = [];
   const stringedTodos = localStorage.getItem('todoItems');
 

@@ -1,9 +1,14 @@
 import React, {PropsWithChildren} from 'react';
 
+import * as Styles from './styles';
+
+
 export const MainLayout = (props: PropsWithChildren) => {
   return (
-    <main>
-      {props.children}
-    </main>
+    <Styles.Wrapper>
+      <Styles.Container>
+        {props.children}
+      </Styles.Container>
+    </Styles.Wrapper>
   );
 };

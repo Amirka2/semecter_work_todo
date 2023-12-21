@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './App.css';
-
 import {MainPage} from "pages/Main/MainPage";
 
 function App() {

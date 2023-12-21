@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 
 import {saveTodo} from "helpers/todoItems";
 
+import * as Styles from './styles';
+
 interface MultiplicatorProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>}
 
@@ -19,11 +21,11 @@ export const Multiplicator = ({setLoading}: MultiplicatorProps) => {
   }
 
   return (
-    <div>
-      <div onClick={handleClick}>
+    <Styles.Wrapper>
+      <Styles.Input type={'text'} onChange={(e) => setText(e.currentTarget.value)}/>
+      <Styles.AddButton onClick={handleClick}>
         +
-      </div>
-      <input type={'text'} onChange={(e) => setText(e.currentTarget.value)}/>
-    </div>
+      </Styles.AddButton>
+    </Styles.Wrapper>
   );
 };
