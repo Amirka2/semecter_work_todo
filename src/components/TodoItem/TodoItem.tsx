@@ -3,6 +3,7 @@ import React, {PropsWithChildren} from 'react';
 import {ITodoItem} from "interfaces";
 
 import * as Styles from './styles';
+import {Close} from "../icons";
 
 interface TodoItemProps {
   handleDelete: () => void;
@@ -32,7 +33,7 @@ export const TodoItem = ({
         <Styles.Delete
           onClick={handleDelete}
         >
-          x
+          <Close width={'16px'} height={'16px'}/>
         </Styles.Delete>
       </Styles.ButtonsWrapper>
     </Styles.Wrapper>

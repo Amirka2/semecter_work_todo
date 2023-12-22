@@ -34,7 +34,9 @@ export const CheckBox = styled.input`
 `;
 
 export const Delete = styled.button`
-  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   background-color: #fff;
   
