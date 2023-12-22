@@ -8,15 +8,8 @@ import * as Styles from './styles';
 
 
 export const Multiplicator = () => {
-  const [text, setText] = useState('');
   const queryClient = useQueryClient();
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    mutation.mutate(text);
-    setText('');
-  }
+  const [text, setText] = useState('');
 
   const mutation = useMutation({
     mutationFn: saveTodo,
@@ -25,12 +18,21 @@ export const Multiplicator = () => {
     },
   })
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    mutation.mutate(text);
+    setText('');
+  }
+
+
   return (
     <Styles.Wrapper
       onSubmit={handleSubmit}
     >
       <Input
         name='new_todo_text'
+        placeholder='Введите текст для нового дела'
         type='text'
         value={text}
         onChange={(e) => setText(e.currentTarget.value)}
