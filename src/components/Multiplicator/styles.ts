@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.form`
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -11,13 +11,21 @@ export const Wrapper = styled.form`
   padding: 0 10px;
 `;
 
+export const ContentWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+  gap: 8px;
+`;
+
 export const AddButton = styled.button`
-  width: 24px;
-  height: 24px;
-  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   background-color: #fff;
   border: none;
-
+  
   cursor: pointer;
 `;
