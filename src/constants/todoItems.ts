@@ -1,1 +1,1 @@
-export const TODO_ITEMS = "todoItems";
+export const TODO_ITEMS_STORAGE = "todoItems";

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 
 import {Multiplicator, Search, BaseTodoList} from "components";
 import {ITodoItem} from "interfaces";
 
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {deleteTodoItem, getTodos, toggleTodoItem} from "helpers";
 
 import * as Styles from './styles';

@@ -44,3 +44,15 @@ export const Delete = styled.button`
   
   cursor: pointer;
 `;
+
+export const OkWrapper = styled.div`
+  cursor: pointer;
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+  gap: 8px;
+`;

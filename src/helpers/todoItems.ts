@@ -68,3 +68,23 @@ export const deleteTodoItem = (id: number) => {
   });
 }
 
+export const editTodoItem = (todoItem: {id: number, editedText: string}) => {
+  let todos = getTodosFromStorage();
+
+  todos = todos.map(item => {
+    if (item.id === todoItem.id) {
+      item.text = todoItem.editedText;
+    }
+
+    return item;
+  });
+
+  setTodosToStorage(todos);
+
+  return new Promise((resolve, reject) => {
+    const newTodos = getTodosFromStorage();
+
+    resolve(newTodos);
+    reject("ОШИБКА В РЕДАКТИРОВАНИИ БЛЯТЬ");
+  });
+}
