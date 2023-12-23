@@ -23,19 +23,25 @@ export const BaseTodoList = ({
           {title}
         </Styles.Caption>
       </Styles.LabelWrapper>
-      <Styles.ItemsList>
-        {todoItems.map(item => (
-          <Styles.ItemsListItem>
-            <TodoItem
-              {...item}
-              key={item.id}
-            >
-              {item.text}
-            </TodoItem>
-          </Styles.ItemsListItem>
-        ))
-        }
-      </Styles.ItemsList>
+      {todoItems.length > 0 ? (
+        <Styles.ItemsList>
+          {todoItems.map(item => (
+            <Styles.ItemsListItem>
+              <TodoItem
+                {...item}
+                key={item.id}
+              >
+                {item.text}
+              </TodoItem>
+            </Styles.ItemsListItem>
+          ))
+          }
+        </Styles.ItemsList>
+      ) : (
+        <div>
+          Cписок пуст 😕
+        </div>
+      )}
     </Styles.Wrapper>
   );
 };
