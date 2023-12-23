@@ -6,16 +6,28 @@ export const Wrapper = styled.div`
   align-items: center;
   
   width: 100%;
-  height: 50px;
+  max-width: 800px;
+  min-height: 50px;
   
-  padding: 0 10px;
+  padding: 5px 10px;
   
-  border: 1px solid black;
+  border: 1px solid lightgray;
   border-radius: 8px;
+  
+  &:hover {
+    border: 1px solid black;  
+  }
 `;
 
-export const Text = styled.span`
-  font-size: 18px;
+export const Text = styled.p`
+  max-height: 100px;
+  max-width: 80%;
+
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 1.2em;
+  white-space: nowrap;
 `;
 
 export const ButtonsWrapper = styled.div`
