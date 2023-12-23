@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {useQuery} from "@tanstack/react-query";
 
 import {Multiplicator, Search, BaseTodoList} from "components";
@@ -16,6 +16,18 @@ export const FilteredTodoItems = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
+  const filteredItems = useMemo(() => {
+    return allTodos?.filter(item => item.text.includes(searchQuery)) || []
+  }, [allTodos, isLoading, searchQuery]);
+
+  const checkedFilteredItems = useMemo(() => {
+    return filteredItems.filter(item => item.isChecked)
+  }, [filteredItems])
+
+  const uncheckedFilteredItems = useMemo(() => {
+    return filteredItems.filter(item => !item.isChecked)
+  }, [filteredItems])
+
   return isLoading ? (
     <p>loading</p>
     ) : (
@@ -25,9 +37,22 @@ export const FilteredTodoItems = () => {
         setSearchQuery={setSearchQuery}
       />
       <Multiplicator />
+      <Styles.LabelWrapper color={'green'}>
+        <Styles.Caption>
+          Выполнено
+        </Styles.Caption>
+      </Styles.LabelWrapper>
       <BaseTodoList
-        todoItems={allTodos?.filter(item => item.text.includes(searchQuery)) || []}
-        // FIXME засунуть в useCallback
+        todoItems={checkedFilteredItems}
+      />
+
+      <Styles.LabelWrapper color={'red'}>
+        <Styles.Caption>
+          К выполнению
+        </Styles.Caption>
+      </Styles.LabelWrapper>
+      <BaseTodoList
+        todoItems={uncheckedFilteredItems}
       />
     </Styles.Wrapper>
     )

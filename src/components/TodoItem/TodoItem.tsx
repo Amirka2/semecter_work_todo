@@ -106,7 +106,7 @@ export const TodoItem = ({
             />
             <Styles.OkWrapper>
               <Ok
-                onClick={() => handleSubmitEdit()}
+                onClick={handleSubmitEdit}
               />
             </Styles.OkWrapper>
           </Styles.ContentWrapper>
