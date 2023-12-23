@@ -99,7 +99,7 @@ export const TodoItem = ({
 
       {isEditModalOpen ? (
         <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
-          <Styles.ContentWrapper>
+          <Styles.ModalContentWrapper>
             <Input
               value={editedText}
               onChange={(e) => setEditedText(e.currentTarget.value)}
@@ -109,14 +109,18 @@ export const TodoItem = ({
                 onClick={handleSubmitEdit}
               />
             </Styles.OkWrapper>
-          </Styles.ContentWrapper>
+          </Styles.ModalContentWrapper>
         </Modal>
       ) : null}
 
       {isDeleteModalOpen ? (
         <Modal isOpen={isDeleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
-          <p>Уверены, что хотите удалить?</p>
-          <Ok onClick={handleSubmitDelete}/>
+          <Styles.ModalContentWrapper>
+            <Styles.TextWrapper>
+              <p>Уверены, что хотите удалить?</p>
+            </Styles.TextWrapper>
+            <Ok onClick={handleSubmitDelete}/>
+          </Styles.ModalContentWrapper>
         </Modal>
       ) : null}
     </>

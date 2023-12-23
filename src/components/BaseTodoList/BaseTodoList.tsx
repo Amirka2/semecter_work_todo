@@ -6,23 +6,36 @@ import {TodoItem} from "components";
 import * as Styles from './styles';
 
 interface TodoListProps {
+  title: string;
+  titleColor?: string;
   todoItems: ITodoItem[];
 }
 
 export const BaseTodoList = ({
-    todoItems,
-  }: TodoListProps) => {
+  title,
+  titleColor = 'lightBlue',
+  todoItems,
+}: TodoListProps) => {
   return (
     <Styles.Wrapper>
-      {todoItems.map(item => (
-        <TodoItem
-          {...item}
-          key={item.id}
-        >
-          {item.text}
-        </TodoItem>
-      ))
-      }
+      <Styles.LabelWrapper color={titleColor}>
+        <Styles.Caption>
+          {title}
+        </Styles.Caption>
+      </Styles.LabelWrapper>
+      <Styles.ItemsList>
+        {todoItems.map(item => (
+          <Styles.ItemsListItem>
+            <TodoItem
+              {...item}
+              key={item.id}
+            >
+              {item.text}
+            </TodoItem>
+          </Styles.ItemsListItem>
+        ))
+        }
+      </Styles.ItemsList>
     </Styles.Wrapper>
   );
 };

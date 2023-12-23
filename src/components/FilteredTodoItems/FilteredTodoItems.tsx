@@ -37,22 +37,15 @@ export const FilteredTodoItems = () => {
         setSearchQuery={setSearchQuery}
       />
       <Multiplicator />
-      <Styles.LabelWrapper color={'green'}>
-        <Styles.Caption>
-          Выполнено
-        </Styles.Caption>
-      </Styles.LabelWrapper>
       <BaseTodoList
-        todoItems={checkedFilteredItems}
-      />
-
-      <Styles.LabelWrapper color={'red'}>
-        <Styles.Caption>
-          К выполнению
-        </Styles.Caption>
-      </Styles.LabelWrapper>
-      <BaseTodoList
+        title={'К выполнению'}
+        titleColor={'lightPink'}
         todoItems={uncheckedFilteredItems}
+      />
+      <BaseTodoList
+        title={'Выполнено'}
+        titleColor={'lightGreen'}
+        todoItems={checkedFilteredItems}
       />
     </Styles.Wrapper>
     )
