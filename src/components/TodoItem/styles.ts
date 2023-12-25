@@ -4,18 +4,18 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   width: 100%;
   max-width: 800px;
   min-height: 50px;
-  
+
   padding: 5px 10px;
-  
-  border: 1px solid lightgray;
+
+  border: 3px solid lightgray;
   border-radius: 8px;
-  
+
   &:hover {
-    border: 1px solid black;  
+    border: 3px solid #8f8f8f;
   }
 `;
 

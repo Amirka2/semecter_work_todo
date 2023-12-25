@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 
-import {Input, Modal, Plus} from "components";
+import {Input, Modal, Ok, Plus} from "components";
 import {saveTodo} from "helpers";
 
 import * as Styles from './styles';
@@ -41,7 +41,7 @@ export const Multiplicator = () => {
           <Styles.AddButton
             type="submit"
           >
-            <Plus />
+            <Ok />
           </Styles.AddButton>
         </Styles.ContentWrapper>
       </Modal>
