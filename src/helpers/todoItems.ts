@@ -5,7 +5,7 @@ import { setTodosToStorage, getTodosFromStorage } from 'helpers';
 
 export const getTodos = () => getTodosFromStorage();
 
-export const saveTodo = (text: string) => {
+export const saveTodo = ({text, description}: {text: string, description?: string}) => {
   const todos = getTodosFromStorage();
 
   let id = 0;
@@ -16,6 +16,7 @@ export const saveTodo = (text: string) => {
 
   const newTodo: ITodoItem = {
     text,
+    description,
     id,
     isChecked: false,
   }
@@ -68,12 +69,15 @@ export const deleteTodoItem = (id: number) => {
   });
 }
 
-export const editTodoItem = (todoItem: {id: number, editedText: string}) => {
+export const editTodoItem = (todoItem: {id: number, editedText: string, editedDescription?: string}) => {
   let todos = getTodosFromStorage();
 
   todos = todos.map(item => {
     if (item.id === todoItem.id) {
       item.text = todoItem.editedText;
+      if (todoItem.editedDescription) {
+        item.description = todoItem.editedDescription;
+      }
     }
 
     return item;

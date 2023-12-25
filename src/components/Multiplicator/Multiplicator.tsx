@@ -6,10 +6,10 @@ import {saveTodo} from "helpers";
 
 import * as Styles from './styles';
 
-
 export const Multiplicator = () => {
   const queryClient = useQueryClient();
   const [text, setText] = useState('');
+  const [description, setDescription] = useState<string | undefined>(undefined);
   const [isAddTodoOpen, setAddTodoOpen] = useState(false);
 
   const mutation = useMutation({
@@ -20,10 +20,14 @@ export const Multiplicator = () => {
   })
 
   const handleSubmit = () => {
-    mutation.mutate(text);
+    mutation.mutate({
+      text,
+      description
+    });
 
     setAddTodoOpen(false);
     setText('');
+    setDescription(undefined);
   }
 
 
@@ -37,6 +41,13 @@ export const Multiplicator = () => {
             type='text'
             value={text}
             onChange={(e) => setText(e.currentTarget.value)}
+          />
+          <Input
+            name='new_todo_description'
+            placeholder='Введите описание нового дела'
+            type='text'
+            value={description}
+            onChange={(e) => setDescription(e.currentTarget.value)}
           />
           <Styles.AddButton
             type="submit"
