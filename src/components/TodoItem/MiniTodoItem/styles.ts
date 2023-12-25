@@ -48,7 +48,7 @@ export const CheckBox = styled.input`
   cursor: pointer;
 `;
 
-export const Delete = styled.button`
+export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;

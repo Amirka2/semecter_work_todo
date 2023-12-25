@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 
 import {ITodoItem, TodoItemProps} from "interfaces";
-import {Close} from "components/icons";
+import {Close, ArrowUp, Edit} from "components/icons";
 
 import * as Styles from './styles';
 
@@ -25,16 +25,16 @@ export const ExtendedTodoItem = ({
           {text}
         </Styles.Text>
         <Styles.ButtonsWrapper>
-          <button
+          <Styles.Button
             onClick={handleClickTodo}
           >
-            Edit
-          </button>
-          <button
+            <Edit />
+          </Styles.Button>
+          <Styles.Button
             onClick={handleDeleteTodo}
           >
             <Close />
-          </button>
+          </Styles.Button>
         </Styles.ButtonsWrapper>
       </Styles.Header>
       <Styles.DescriptionWrapper>
@@ -44,9 +44,9 @@ export const ExtendedTodoItem = ({
         <Styles.Text>
           {isChecked ? 'Выполнено' : 'Не выполнено'}
         </Styles.Text>
-        <button onClick={handleExtendClick}>
-          Свернуть
-        </button>
+        <Styles.Button onClick={handleExtendClick}>
+          <ArrowUp />
+        </Styles.Button>
       </Styles.Footer>
     </Styles.Wrapper>
   );

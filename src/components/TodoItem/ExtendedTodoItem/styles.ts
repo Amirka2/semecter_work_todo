@@ -19,12 +19,26 @@ const Row = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const Header = styled(Row)``;
+
 export const Footer = styled(Row)``;
 
 export const ButtonsWrapper = styled.div`
   display: flex;
   gap: 4px;
+`;
+
+export const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fff;
+
+  border: none;
+
+  cursor: pointer;
 `;
 
 export const Text = styled.span`

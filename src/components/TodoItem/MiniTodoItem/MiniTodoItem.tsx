@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 
-import {Close} from "components/icons";
+import {Close, ArrowDown, Edit} from "components/icons";
 import {ITodoItem, TodoItemProps} from "interfaces";
 
 import * as Styles from "./styles";
@@ -30,18 +30,18 @@ export const MiniTodoItem = ({
       </Styles.Text>
       <Styles.ButtonsWrapper>
         {isExtendable ? (
-          <button onClick={handleExtendClick}>
-            Раскрыть
-          </button>
+          <Styles.Button onClick={handleExtendClick}>
+            <ArrowDown />
+          </Styles.Button>
         ) : null}
-        <button onClick={handleClickTodo}>
-          Edit
-        </button>
-        <Styles.Delete
+        <Styles.Button onClick={handleClickTodo}>
+          <Edit />
+        </Styles.Button>
+        <Styles.Button
           onClick={(e) => handleDeleteTodo(e)}
         >
           <Close width={'16px'} height={'16px'}/>
-        </Styles.Delete>
+        </Styles.Button>
       </Styles.ButtonsWrapper>
     </Styles.Wrapper>
   );
