@@ -9,7 +9,7 @@ import * as Styles from './styles';
 export const Multiplicator = () => {
   const queryClient = useQueryClient();
   const [text, setText] = useState('');
-  const [description, setDescription] = useState<string | undefined>(undefined);
+  const [description, setDescription] = useState<string>('');
   const [isAddTodoOpen, setAddTodoOpen] = useState(false);
 
   const mutation = useMutation({
@@ -22,12 +22,14 @@ export const Multiplicator = () => {
   const handleSubmit = () => {
     mutation.mutate({
       text,
-      description
+      description: description === ''
+        ? undefined
+        : description
     });
 
     setAddTodoOpen(false);
     setText('');
-    setDescription(undefined);
+    setDescription('');
   }
 
 
