@@ -16,26 +16,27 @@ export const MiniTodoItem = ({
   children
 }: PropsWithChildren<TodoItemProps & Omit<ITodoItem, 'description' | 'text'>>) => {
   return (
-    <Styles.Wrapper
-      onClick={handleClickTodo}
-    >
+    <Styles.Wrapper>
       <Styles.Text>
-        {isExtendable ? (
-          <button onClick={handleExtendClick}>
-            Раскрыть
-          </button>
-        ) : null}
-
-        {children}
-
-      </Styles.Text>
-      <Styles.ButtonsWrapper>
         <Styles.CheckBox
           name={`checkbox_${id}`}
           type={"checkbox"}
           defaultChecked={isChecked}
           onClick={handleCheckboxToggle}
         />
+
+        {children}
+
+      </Styles.Text>
+      <Styles.ButtonsWrapper>
+        {isExtendable ? (
+          <button onClick={handleExtendClick}>
+            Раскрыть
+          </button>
+        ) : null}
+        <button onClick={handleClickTodo}>
+          Edit
+        </button>
         <Styles.Delete
           onClick={(e) => handleDeleteTodo(e)}
         >

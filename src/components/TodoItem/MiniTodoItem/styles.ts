@@ -20,6 +20,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Text = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 4px;
   max-height: 100px;
   max-width: 80%;
 
