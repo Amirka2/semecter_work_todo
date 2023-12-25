@@ -1,6 +1,9 @@
 import React from 'react';
 
-import {Input} from "components";
+import {Close} from "components/icons";
+import {Input} from "components/Input";
+
+import * as Styles from './styles';
 
 interface SearchProps {
   searchQuery: string;
@@ -9,12 +12,15 @@ interface SearchProps {
 
 export const Search = ({searchQuery, setSearchQuery}: SearchProps) => {
   return (
-    <div>
+    <Styles.Wrapper>
       <Input
         placeholder="Введите текст для поиска"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.currentTarget.value)}
       />
-    </div>
+      <Styles.ResetIcon onClick={() => setSearchQuery('')}>
+        <Close />
+      </Styles.ResetIcon>
+    </Styles.Wrapper>
   );
 };
