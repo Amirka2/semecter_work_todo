@@ -11,7 +11,6 @@ export const ExtendedTodoItem = ({
   isChecked,
   description,
   handleClickTodo,
-  handleCheckboxToggle,
   handleDeleteTodo,
   handleExtendClick
 }: PropsWithChildren<TodoItemProps & ITodoItem>) => {

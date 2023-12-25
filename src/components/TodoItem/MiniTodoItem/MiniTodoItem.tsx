@@ -22,7 +22,7 @@ export const MiniTodoItem = ({
           name={`checkbox_${id}`}
           type={"checkbox"}
           defaultChecked={isChecked}
-          onClick={handleCheckboxToggle}
+          onChange={handleCheckboxToggle}
         />
 
         {children}

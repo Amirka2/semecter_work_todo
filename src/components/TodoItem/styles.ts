@@ -26,3 +26,11 @@ export const Description = styled.textarea`
   
   resize: none;
 `;
+
+export const CheckboxWrapper = styled.div`
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;

@@ -53,8 +53,9 @@ export const TodoItem = ({
     setDeleteModalOpen(true)
   }
 
-  const handleCheckboxToggle = (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleCheckboxToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
+    e.preventDefault();
 
     mutationToggle.mutate(id);
   }
@@ -126,6 +127,14 @@ export const TodoItem = ({
               value={editedDescription}
               onChange={(e) => setEditedDescription(e.currentTarget.value)}
             />
+            <Styles.CheckboxWrapper>
+              Выполнено:
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCheckboxToggle}
+              />
+            </Styles.CheckboxWrapper>
             <Styles.OkWrapper>
               <Ok
                 onClick={handleSubmitEdit}

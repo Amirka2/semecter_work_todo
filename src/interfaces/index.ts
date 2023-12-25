@@ -9,7 +9,7 @@ export interface ITodoItem {
 
 export interface TodoItemProps {
   handleClickTodo: () => void;
-  handleCheckboxToggle: (e: React.MouseEvent<HTMLInputElement>) => void;
+  handleCheckboxToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleDeleteTodo: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isExtendable?: boolean;
   handleExtendClick?: () => void;
