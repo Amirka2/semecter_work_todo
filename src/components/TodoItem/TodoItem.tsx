@@ -4,11 +4,12 @@ import {useMutation} from "@tanstack/react-query";
 
 import {ITodoItem} from "interfaces";
 
-import {Close, Input, Modal, Ok} from "components";
+import {Input, Modal, Ok} from "components";
 import {deleteTodoItem, editTodoItem, toggleTodoItem} from "helpers";
 
-import * as Styles from './styles';
+import {MiniTodoItem} from "./MiniTodoItem";
 
+import * as Styles from './styles';
 
 export const TodoItem = ({
   children,
@@ -22,7 +23,7 @@ export const TodoItem = ({
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const handleTodoClick = () => {
+  const handleClickTodo = () => {
     setEditModalOpen(true);
   }
 
@@ -41,16 +42,20 @@ export const TodoItem = ({
     setDeleteModalOpen(false);
   }
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDeleteTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     setDeleteModalOpen(true)
   }
 
-  const handleToggle = (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleCheckboxToggle = (e: React.MouseEvent<HTMLInputElement>) => {
     e.stopPropagation();
 
     mutationToggle.mutate(id);
+  }
+
+  const handleExtendClick = () => {
+
   }
 
   const mutationToggle = useMutation({
@@ -76,26 +81,17 @@ export const TodoItem = ({
 
   return (
     <>
-      <Styles.Wrapper
-        onClick={handleTodoClick}
-      >
-        <Styles.Text>
-          {children}
-        </Styles.Text>
-        <Styles.ButtonsWrapper>
-          <Styles.CheckBox
-            name={`checkbox_${id}`}
-            type={"checkbox"}
-            defaultChecked={isChecked}
-            onClick={handleToggle}
-          />
-          <Styles.Delete
-            onClick={(e) => handleDelete(e)}
-          >
-            <Close width={'16px'} height={'16px'}/>
-          </Styles.Delete>
-        </Styles.ButtonsWrapper>
-      </Styles.Wrapper>
+      <MiniTodoItem
+        todoItem={{
+          id,
+          isChecked
+        }}
+        handleClickTodo={handleClickTodo}
+        handleCheckboxToggle={handleCheckboxToggle}
+        handleDeleteTodo={handleDeleteTodo}
+        >
+        {children}
+      </MiniTodoItem>
 
       {isEditModalOpen ? (
         <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
