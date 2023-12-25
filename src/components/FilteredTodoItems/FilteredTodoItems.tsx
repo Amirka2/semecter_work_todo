@@ -17,7 +17,9 @@ export const FilteredTodoItems = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredItems = useMemo(() => {
-    return allTodos?.filter(item => item.text.includes(searchQuery)) || []
+    return allTodos?.filter(item => item.text.includes(searchQuery)
+      || (item.description && item.description.includes(searchQuery)))
+      || []
   }, [allTodos, isLoading, searchQuery]);
 
   const checkedFilteredItems = useMemo(() => {
