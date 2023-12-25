@@ -2,7 +2,7 @@ import React, {PropsWithChildren, useCallback, useMemo, useState} from 'react';
 import {useQueryClient} from "@tanstack/react-query";
 import {useMutation} from "@tanstack/react-query";
 
-import {ITodoItem} from "interfaces";
+import {ITodoItem, TodoItemProps} from "interfaces";
 
 import {Input, Modal, Ok} from "components";
 import {deleteTodoItem, editTodoItem, toggleTodoItem} from "helpers";
@@ -66,18 +66,20 @@ export const TodoItem = ({
   }
 
   const todoProps = useMemo(() => {
-    return {
+    const x: TodoItemProps & ITodoItem = {
       handleClickTodo: handleTodoEdit,
       handleCheckboxToggle,
       handleDeleteTodo,
       handleExtendClick,
+      isExtendable: !!description,
       ...{
         id,
         text,
         isChecked,
         description
-      }
-    }
+      }}
+
+      return x;
   }, [isChecked, text, description])
 
   const mutationToggle = useMutation({
