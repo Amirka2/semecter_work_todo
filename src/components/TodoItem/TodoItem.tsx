@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useState} from 'react';
+import React, {PropsWithChildren, useCallback, useMemo, useState} from 'react';
 import {useQueryClient} from "@tanstack/react-query";
 import {useMutation} from "@tanstack/react-query";
 
@@ -21,17 +21,19 @@ export const TodoItem = ({
 }: PropsWithChildren<ITodoItem>) => {
   const queryClient = useQueryClient();
 
-  const [editedText, setEditedText] = useState(text);
-  const [editedDescription, setEditedDescription] = useState<string | undefined>(description);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isExtended, setIsExtended] = useState(false);
 
-  const handleClickTodo = () => {
+  const [editedText, setEditedText] = useState(text);
+  const [editedDescription, setEditedDescription] = useState<string | undefined>(description);
+
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const handleTodoEdit = () => {
     setEditModalOpen(true);
   }
 
-  const handleSubmitEdit = () => {
+  const handleSubmitEdit = useCallback(() => {
     mutationEdit.mutate({
       id,
       editedText,
@@ -39,7 +41,13 @@ export const TodoItem = ({
     });
 
     setEditModalOpen(false);
-  }
+  }, [id, editedText, editedDescription, isEditModalOpen]);
+
+  const handleDeleteTodo = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    setDeleteModalOpen(true)
+  }, [isDeleteModalOpen]);
 
   const handleSubmitDelete = () => {
     mutationDelete.mutate(id);
@@ -47,15 +55,8 @@ export const TodoItem = ({
     setDeleteModalOpen(false);
   }
 
-  const handleDeleteTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-
-    setDeleteModalOpen(true)
-  }
-
   const handleCheckboxToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    e.preventDefault();
 
     mutationToggle.mutate(id);
   }
@@ -63,6 +64,21 @@ export const TodoItem = ({
   const handleExtendClick = () => {
     setIsExtended(prev => !prev);
   }
+
+  const todoProps = useMemo(() => {
+    return {
+      handleClickTodo: handleTodoEdit,
+      handleCheckboxToggle,
+      handleDeleteTodo,
+      handleExtendClick,
+      ...{
+        id,
+        text,
+        isChecked,
+        description
+      }
+    }
+  }, [isChecked, text, description])
 
   const mutationToggle = useMutation({
     mutationFn: toggleTodoItem,
@@ -88,30 +104,9 @@ export const TodoItem = ({
   return (
     <>
       {isExtended ? (
-        <ExtendedTodoItem
-          handleClickTodo={handleClickTodo}
-          handleCheckboxToggle={handleCheckboxToggle}
-          handleDeleteTodo={handleDeleteTodo}
-          handleExtendClick={handleExtendClick}
-          { ...{
-            id,
-            text,
-            isChecked,
-            description
-          }}
-        />
+        <ExtendedTodoItem { ...todoProps } />
       ) : (
-        <MiniTodoItem
-          handleClickTodo={handleClickTodo}
-          handleCheckboxToggle={handleCheckboxToggle}
-          handleDeleteTodo={handleDeleteTodo}
-          isExtendable={!!description}
-          handleExtendClick={handleExtendClick}
-          { ...{
-            id,
-            isChecked
-          }}
-        >
+        <MiniTodoItem { ...todoProps } >
           {children}
         </MiniTodoItem>
       )}
