@@ -26,7 +26,7 @@ export const BaseTodoList = ({
       {todoItems.length > 0 ? (
         <Styles.ItemsList>
           {todoItems.map(item => (
-            <Styles.ItemsListItem>
+            <Styles.ItemsListItem key={item.id}>
               <TodoItem
                 {...item}
                 key={item.id}
