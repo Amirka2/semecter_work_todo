@@ -15,3 +15,14 @@ export const ModalContentWrapper = styled.div`
 export const TextWrapper = styled.div`
   width: 100%;
 `;
+
+export const Description = styled.textarea`
+  width: 100%;
+  min-height: 70px;
+  
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 10px;
+  
+  resize: none;
+`;

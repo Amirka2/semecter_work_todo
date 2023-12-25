@@ -22,6 +22,7 @@ export const TodoItem = ({
   const queryClient = useQueryClient();
 
   const [editedText, setEditedText] = useState(text);
+  const [editedDescription, setEditedDescription] = useState<string | undefined>(description);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isExtended, setIsExtended] = useState(false);
@@ -33,7 +34,8 @@ export const TodoItem = ({
   const handleSubmitEdit = () => {
     mutationEdit.mutate({
       id,
-      editedText
+      editedText,
+      editedDescription
     });
 
     setEditModalOpen(false);
@@ -119,6 +121,10 @@ export const TodoItem = ({
             <Input
               value={editedText}
               onChange={(e) => setEditedText(e.currentTarget.value)}
+            />
+            <Styles.Description
+              value={editedDescription}
+              onChange={(e) => setEditedDescription(e.currentTarget.value)}
             />
             <Styles.OkWrapper>
               <Ok
