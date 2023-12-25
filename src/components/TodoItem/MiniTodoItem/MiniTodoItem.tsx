@@ -1,36 +1,39 @@
 import React, {PropsWithChildren} from 'react';
 
 import {Close} from "components/icons";
-import {ITodoItem} from "interfaces";
+import {ITodoItem, TodoItemProps} from "interfaces";
 
 import * as Styles from "./styles";
-
-interface MiniTodoItemProps {
-  todoItem: Omit<ITodoItem, 'description' | 'text'>;
-  handleClickTodo: () => void;
-  handleCheckboxToggle: (e: React.MouseEvent<HTMLInputElement>) => void;
-  handleDeleteTodo: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
 
 export const MiniTodoItem = ({
   handleClickTodo,
   handleCheckboxToggle,
   handleDeleteTodo,
-  todoItem,
+  isExtendable = false,
+  handleExtendClick,
+  id,
+  isChecked,
   children
-}: PropsWithChildren<MiniTodoItemProps>) => {
+}: PropsWithChildren<TodoItemProps & Omit<ITodoItem, 'description' | 'text'>>) => {
   return (
     <Styles.Wrapper
       onClick={handleClickTodo}
     >
       <Styles.Text>
+        {isExtendable ? (
+          <button onClick={handleExtendClick}>
+            Раскрыть
+          </button>
+        ) : null}
+
         {children}
+
       </Styles.Text>
       <Styles.ButtonsWrapper>
         <Styles.CheckBox
-          name={`checkbox_${todoItem.id}`}
+          name={`checkbox_${id}`}
           type={"checkbox"}
-          defaultChecked={todoItem.isChecked}
+          defaultChecked={isChecked}
           onClick={handleCheckboxToggle}
         />
         <Styles.Delete

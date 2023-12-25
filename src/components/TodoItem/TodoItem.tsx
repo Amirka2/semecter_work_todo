@@ -8,6 +8,7 @@ import {Input, Modal, Ok} from "components";
 import {deleteTodoItem, editTodoItem, toggleTodoItem} from "helpers";
 
 import {MiniTodoItem} from "./MiniTodoItem";
+import {ExtendedTodoItem} from "./ExtendedTodoItem";
 
 import * as Styles from './styles';
 
@@ -15,13 +16,15 @@ export const TodoItem = ({
   children,
   isChecked,
   id,
-  text
+  text,
+  description
 }: PropsWithChildren<ITodoItem>) => {
   const queryClient = useQueryClient();
 
   const [editedText, setEditedText] = useState(text);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isExtended, setIsExtended] = useState(false);
 
   const handleClickTodo = () => {
     setEditModalOpen(true);
@@ -55,7 +58,7 @@ export const TodoItem = ({
   }
 
   const handleExtendClick = () => {
-
+    setIsExtended(prev => !prev);
   }
 
   const mutationToggle = useMutation({
@@ -81,17 +84,34 @@ export const TodoItem = ({
 
   return (
     <>
-      <MiniTodoItem
-        todoItem={{
-          id,
-          isChecked
-        }}
-        handleClickTodo={handleClickTodo}
-        handleCheckboxToggle={handleCheckboxToggle}
-        handleDeleteTodo={handleDeleteTodo}
+      {isExtended ? (
+        <ExtendedTodoItem
+          handleClickTodo={handleClickTodo}
+          handleCheckboxToggle={handleCheckboxToggle}
+          handleDeleteTodo={handleDeleteTodo}
+          handleExtendClick={handleExtendClick}
+          { ...{
+            id,
+            text,
+            isChecked,
+            description
+          }}
+        />
+      ) : (
+        <MiniTodoItem
+          handleClickTodo={handleClickTodo}
+          handleCheckboxToggle={handleCheckboxToggle}
+          handleDeleteTodo={handleDeleteTodo}
+          isExtendable={!!description}
+          handleExtendClick={handleExtendClick}
+          { ...{
+            id,
+            isChecked
+          }}
         >
-        {children}
-      </MiniTodoItem>
+          {children}
+        </MiniTodoItem>
+      )}
 
       {isEditModalOpen ? (
         <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
