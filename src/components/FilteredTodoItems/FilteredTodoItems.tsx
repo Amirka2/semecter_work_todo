@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import {useQuery} from "@tanstack/react-query";
 
-import {Multiplicator, Search, BaseTodoList} from "components";
+import {AddTodo, Search, BaseTodoList} from "components";
 import {ITodoItem} from "interfaces";
 
 import {QUERY_KEYS} from "constants/reactQuery";
@@ -39,7 +39,7 @@ export const FilteredTodoItems = () => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <Multiplicator />
+      <AddTodo />
       <BaseTodoList
         title={'К выполнению'}
         titleColor={'lightPink'}

@@ -1,1 +1,0 @@
-export { Multiplicator } from './Multiplicator';

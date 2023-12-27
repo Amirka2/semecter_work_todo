@@ -7,7 +7,7 @@ import {saveTodo} from "helpers";
 
 import * as Styles from './styles';
 
-export const Multiplicator = () => {
+export const AddTodo = () => {
   const queryClient = useQueryClient();
   const [text, setText] = useState('');
   const [description, setDescription] = useState<string>('');
