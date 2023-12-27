@@ -1,1 +1,3 @@
-export const TODO_ITEMS_STORAGE = "todoItems";
+export const STORAGE_KEYS = {
+  TODO_ITEMS: 'todoItems',
+}
