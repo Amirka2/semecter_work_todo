@@ -31,7 +31,7 @@ export const saveTodo = ({text, description}: {text: string, description?: strin
     try {
       resolve(newTodos);
     } catch (e) {
-      reject("ОШИБКА В СОХРАНЕНИИ БЛЯТЬ");
+      reject("ОШИБКА");
     }
   });
 }
@@ -55,7 +55,7 @@ export const toggleTodoItem = (id: number) => {
     try {
       resolve(newTodos);
     } catch (e) {
-      reject("ОШИБКА В ИЗМЕНЕНИИ ПОЛЯ БЛЯТЬ");
+      reject("ОШИБКА");
     }
   })
 }
@@ -73,7 +73,7 @@ export const deleteTodoItem = (id: number) => {
     try {
       resolve(newTodos);
     } catch (e) {
-      reject("ОШИБКА В УДАЛЕНИИ БЛЯТЬ");
+      reject("ОШИБКА");
     }
 
   });
@@ -101,7 +101,7 @@ export const editTodoItem = (todoItem: {id: number, editedText: string, editedDe
     try {
       resolve(newTodos);
     } catch (e) {
-      reject("ОШИБКА В РЕДАКТИРОВАНИИ БЛЯТЬ");
+      reject("ОШИБКА");
     }
   });
 }
