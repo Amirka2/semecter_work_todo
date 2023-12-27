@@ -28,8 +28,11 @@ export const saveTodo = ({text, description}: {text: string, description?: strin
   return new Promise((resolve, reject) => {
     const newTodos = getTodosFromStorage();
 
-    resolve(newTodos);
-    reject("ОШИБКА В СОХРАНЕНИИ БЛЯТЬ");
+    try {
+      resolve(newTodos);
+    } catch (e) {
+      reject("ОШИБКА В СОХРАНЕНИИ БЛЯТЬ");
+    }
   });
 }
 
@@ -49,8 +52,11 @@ export const toggleTodoItem = (id: number) => {
   return new Promise((resolve, reject) => {
     const newTodos = getTodosFromStorage();
 
-    resolve(newTodos);
-    reject("ОШИБКА В ИЗМЕНЕНИИ ПОЛЯ БЛЯТЬ");
+    try {
+      resolve(newTodos);
+    } catch (e) {
+      reject("ОШИБКА В ИЗМЕНЕНИИ ПОЛЯ БЛЯТЬ");
+    }
   })
 }
 
@@ -64,8 +70,12 @@ export const deleteTodoItem = (id: number) => {
   return new Promise((resolve, reject) => {
     const newTodos = getTodosFromStorage();
 
-    resolve(newTodos);
-    reject("ОШИБКА В УДАЛЕНИИ БЛЯТЬ");
+    try {
+      resolve(newTodos);
+    } catch (e) {
+      reject("ОШИБКА В УДАЛЕНИИ БЛЯТЬ");
+    }
+
   });
 }
 
@@ -88,7 +98,10 @@ export const editTodoItem = (todoItem: {id: number, editedText: string, editedDe
   return new Promise((resolve, reject) => {
     const newTodos = getTodosFromStorage();
 
-    resolve(newTodos);
-    reject("ОШИБКА В РЕДАКТИРОВАНИИ БЛЯТЬ");
+    try {
+      resolve(newTodos);
+    } catch (e) {
+      reject("ОШИБКА В РЕДАКТИРОВАНИИ БЛЯТЬ");
+    }
   });
 }
