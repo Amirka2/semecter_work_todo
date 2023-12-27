@@ -4,13 +4,14 @@ import {useQuery} from "@tanstack/react-query";
 import {Multiplicator, Search, BaseTodoList} from "components";
 import {ITodoItem} from "interfaces";
 
+import {QUERY_KEYS} from "constants/reactQuery";
 import {getTodos} from "helpers";
 
 import * as Styles from './styles';
 
 export const FilteredTodoItems = () => {
   const { data: allTodos, isLoading} = useQuery<ITodoItem[]>({
-    queryKey: ['todos'],
+    queryKey: [QUERY_KEYS.TODOS],
     queryFn: getTodos,
   });
 

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 
+import {QUERY_KEYS} from "constants/reactQuery";
 import {Input, Modal, Ok, Plus} from "components";
 import {saveTodo} from "helpers";
 
@@ -15,7 +16,7 @@ export const Multiplicator = () => {
   const mutation = useMutation({
     mutationFn: saveTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] })
     },
   })
 

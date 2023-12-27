@@ -7,6 +7,7 @@ import {ITodoItem, TodoItemProps} from "interfaces";
 import {Input, Modal, Ok} from "components";
 import {deleteTodoItem, editTodoItem, toggleTodoItem} from "helpers";
 
+import {QUERY_KEYS} from "constants/reactQuery";
 import {MiniTodoItem} from "./MiniTodoItem";
 import {ExtendedTodoItem} from "./ExtendedTodoItem";
 
@@ -85,21 +86,21 @@ export const TodoItem = ({
   const mutationToggle = useMutation({
     mutationFn: toggleTodoItem,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] })
     },
   })
 
   const mutationDelete = useMutation({
     mutationFn: deleteTodoItem,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] })
     },
   })
 
   const mutationEdit = useMutation({
     mutationFn: editTodoItem,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] })
     },
   })
 
