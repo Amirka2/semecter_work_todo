@@ -1,5 +1,10 @@
 import React from "react";
 
+export interface ICreateTodoItem {
+  text: string;
+  description?: string;
+}
+
 export interface ITodoItem {
   id: number;
   text: string;

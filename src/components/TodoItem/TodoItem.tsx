@@ -37,8 +37,9 @@ export const TodoItem = ({
   const handleSubmitEdit = useCallback(() => {
     mutationEdit.mutate({
       id,
-      editedText,
-      editedDescription
+      isChecked,
+      text: editedText,
+      description: editedDescription,
     });
 
     setEditModalOpen(false);

@@ -1,108 +1,12 @@
-import {ITodoItem} from "interfaces";
-
-import { setTodosToStorage, getTodosFromStorage } from 'helpers';
-import { getTodosFromApi } from "helpers/api";
+import {deleteTodo, editTodo, getTodosFromApi, saveTodo as saveTodoToApi, toggleTodo} from "helpers/api";
 
 
 export const getTodos = getTodosFromApi;
 
-export const saveTodo = ({text, description}: {text: string, description?: string}) => {
-  const todos = getTodosFromStorage();
+export const saveTodo = saveTodoToApi;
 
-  let id = 0;
+export const toggleTodoItem = toggleTodo;
 
-  if (todos && todos.length > 0) {
-    id = todos[todos.length - 1].id + 1;
-  }
+export const deleteTodoItem = deleteTodo;
 
-  const newTodo: ITodoItem = {
-    text,
-    description,
-    id,
-    isChecked: false,
-  }
-
-  todos.push(newTodo);
-
-  setTodosToStorage(todos);
-
-  return new Promise((resolve, reject) => {
-    const newTodos = getTodosFromStorage();
-
-    try {
-      resolve(newTodos);
-    } catch (e) {
-      reject("ОШИБКА");
-    }
-  });
-}
-
-export const toggleTodoItem = (id: number) => {
-  let todos = getTodosFromStorage();
-
-  todos = todos.map(item => {
-    if (item.id === id) {
-      item.isChecked = !item.isChecked;
-    }
-
-    return item;
-  });
-
-  setTodosToStorage(todos);
-
-  return new Promise((resolve, reject) => {
-    const newTodos = getTodosFromStorage();
-
-    try {
-      resolve(newTodos);
-    } catch (e) {
-      reject("ОШИБКА");
-    }
-  })
-}
-
-export const deleteTodoItem = (id: number) => {
-  let todos = getTodosFromStorage();
-
-  todos = todos.filter(item => item.id !== id);
-
-  setTodosToStorage(todos);
-
-  return new Promise((resolve, reject) => {
-    const newTodos = getTodosFromStorage();
-
-    try {
-      resolve(newTodos);
-    } catch (e) {
-      reject("ОШИБКА");
-    }
-
-  });
-}
-
-export const editTodoItem = (todoItem: {id: number, editedText: string, editedDescription?: string}) => {
-  let todos = getTodosFromStorage();
-
-  todos = todos.map(item => {
-    if (item.id === todoItem.id) {
-      item.text = todoItem.editedText;
-      if (todoItem.editedDescription) {
-        item.description = todoItem.editedDescription;
-      }
-    }
-
-    return item;
-  });
-
-  setTodosToStorage(todos);
-
-  return new Promise((resolve, reject) => {
-    const newTodos = getTodosFromStorage();
-
-    try {
-      resolve(newTodos);
-    } catch (e) {
-      reject("ОШИБКА");
-    }
-  });
-}
+export const editTodoItem = editTodo;
