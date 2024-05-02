@@ -21,7 +21,7 @@ export const FilteredTodoItems = () => {
   const filteredItems = useMemo(() => {
     if (allTodos && isSuccess)
       return allTodos.filter(item => item.text.includes(searchQuery)
-        || item?.description.includes(searchQuery));
+        || item?.description?.includes(searchQuery));
 
     return [];
   }, [allTodos, isLoading, searchQuery]);
