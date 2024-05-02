@@ -2,6 +2,7 @@ import path from "path";
 import HtmlWebPackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import type { Configuration as DevServerConfiguration} from 'webpack-dev-server';
+import Dotenv from 'dotenv-webpack';
 
 type Mode = 'development' | 'production';
 
@@ -28,6 +29,10 @@ export default (env: EnvVariables) => {
       new HtmlWebPackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
       // slow plugin showing progress of build
       isDev && new webpack.ProgressPlugin(),
+      new Dotenv({
+        path: '.env',
+        safe: true
+      })
     ].filter(Boolean),
     module: {
       rules: [
