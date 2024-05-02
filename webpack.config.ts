@@ -52,6 +52,7 @@ export default (env: EnvVariables) => {
         "mock": path.resolve(__dirname, 'src/mock'),
         "pages": path.resolve(__dirname, 'src/pages'),
         "helpers": path.resolve(__dirname, 'src/helpers'),
+        "app": path.resolve(__dirname, 'src/app'),
       }
     },
     // getting stacktrace

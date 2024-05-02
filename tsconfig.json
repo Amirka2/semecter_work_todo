@@ -16,7 +16,8 @@
       "interfaces/*": ["interfaces/*"],
       "mock/*": ["mock/*"],
       "pages/*": ["pages/*"],
-      "helpers/*": ["helpers/*"]
+      "helpers/*": ["helpers/*"],
+      "app/*": ["app/*"]
     }
   },
   "ts-node": {
