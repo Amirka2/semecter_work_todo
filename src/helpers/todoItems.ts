@@ -1,9 +1,10 @@
 import {ITodoItem} from "interfaces";
 
 import { setTodosToStorage, getTodosFromStorage } from 'helpers';
+import { getTodosFromApi } from "helpers/api";
 
 
-export const getTodos = () => getTodosFromStorage();
+export const getTodos = getTodosFromApi;
 
 export const saveTodo = ({text, description}: {text: string, description?: string}) => {
   const todos = getTodosFromStorage();

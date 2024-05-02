@@ -10,26 +10,29 @@ import {getTodos} from "helpers";
 import * as Styles from './styles';
 
 export const FilteredTodoItems = () => {
-  const { data: allTodos, isLoading} = useQuery<ITodoItem[]>({
+  const { data: allTodos, isLoading, isSuccess } = useQuery({
     queryKey: [QUERY_KEYS.TODOS],
     queryFn: getTodos,
+    initialData: [],
   });
 
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredItems = useMemo(() => {
-    return allTodos?.filter(item => item.text.includes(searchQuery)
-      || (item.description && item.description.includes(searchQuery)))
-      || []
+    if (allTodos && isSuccess)
+      return allTodos.filter(item => item.text.includes(searchQuery)
+        || item?.description.includes(searchQuery));
+
+    return [];
   }, [allTodos, isLoading, searchQuery]);
 
-  const checkedFilteredItems = useMemo(() => {
-    return filteredItems.filter(item => item.isChecked)
-  }, [filteredItems])
+  const checkedFilteredItems = useMemo(
+    () => filteredItems?.filter(item => item.isChecked),
+    [filteredItems]);
 
-  const uncheckedFilteredItems = useMemo(() => {
-    return filteredItems.filter(item => !item.isChecked)
-  }, [filteredItems])
+  const uncheckedFilteredItems = useMemo(
+    () => filteredItems?.filter(item => !item.isChecked),
+    [filteredItems]);
 
   return isLoading ? (
     <p>loading</p>
